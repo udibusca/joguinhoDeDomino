@@ -1,4 +1,4 @@
-# joguinho De Domino
+# Joguinho De Domino
 
 Jogo de Domino, usando RMI e interface Swing.
 
