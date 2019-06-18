@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
+/**
+ * Classe responsavel para Criar/iniciar um jogador
+ * @author acastroa
+ *
+ */
 public class Jogador implements Serializable {
 
 	ArrayList fichas;
@@ -14,18 +18,32 @@ public class Jogador implements Serializable {
 	Clip clip;
 	AudioInputStream audio;
 
+	/**
+	 * Instantiates a new jogador.
+	 *
+	 * @param fichas the fichas
+	 */
 	public Jogador(ArrayList fichas) {
 
 		this.fichas = fichas;
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object x) {
 
 		return nome.equals(((Jogador) x).nome);
 
 	}
 
+	/**
+	 * Move.
+	 *
+	 * @param x the x
+	 * @return true, if successful
+	 */
 	public boolean Move(int x) {
 		boolean lleva = false;
 		for (int i = 0; i < fichas.size(); i++) {
@@ -35,10 +53,12 @@ public class Jogador implements Serializable {
 		}
 		return lleva;
 	}
+	
 	/**
 	 * Cada mexida de cada jogador é emitido um som.
-	 * @param x
-	 * @return
+	 *
+	 * @param x the x
+	 * @return the peca
 	 */
 	public Peca somPecasMovendo(Peca x) {
 

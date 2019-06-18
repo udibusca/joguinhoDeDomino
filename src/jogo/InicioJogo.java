@@ -21,11 +21,17 @@ public class InicioJogo extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Instantiates a new inicio jogo.
+	 */
 	public InicioJogo() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
+    /**
+     * Inits the components.
+     */
     private void initComponents() {
 
         jRadioButton1 = new javax.swing.JRadioButton();
@@ -97,6 +103,11 @@ public class InicioJogo extends JFrame {
         pack();
     }
 
+    /**
+     * J button 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
             dispose();
             //TODO Para implementar usando RMI
@@ -105,21 +116,41 @@ public class InicioJogo extends JFrame {
             if (jRadioButton3.isSelected()) new Domino().setVisible(true);
     }
 
+    /**
+     * J radio button 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
           jRadioButton2.setSelected(false);
           jRadioButton3.setSelected(false);
     }
 
+    /**
+     * J radio button 2 action performed.
+     *
+     * @param evt the evt
+     */
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         jRadioButton1.setSelected(false);
         jRadioButton3.setSelected(false);
     }
 
+    /**
+     * J radio button 3 action performed.
+     *
+     * @param evt the evt
+     */
     private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {
        jRadioButton1.setSelected(false);
        jRadioButton2.setSelected(false);
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String args[]) {
 
         try {

@@ -1,21 +1,29 @@
 package jogo;
 
 import javax.swing.JDialog;
-
+/**
+ * Classe responsavel por criar o nome jogador/modal
+ * @author acastroa
+ *
+ */
 public class Nome extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Criar o nome jogador
-	 * @param parent
-	 * @param modal
+	 * Criar o nome jogador.
+	 *
+	 * @param parent the parent
+	 * @param modal the modal
 	 */
 	public Nome(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
+    /**
+     * Inits the components.
+     */
     private void initComponents() {
 
         nome = new javax.swing.JTextField();
@@ -61,20 +69,40 @@ public class Nome extends JDialog {
         pack();
     }
 
+    /**
+     * J button 1 action performed.
+     *
+     * @param evt the evt
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
    dispose();
     }
 
+    /**
+     * Virtual action performed.
+     *
+     * @param evt the evt
+     */
     private void virtualActionPerformed(java.awt.event.ActionEvent evt) {
          jogadorHumano.setSelected(false);
 
     }
 
+    /**
+     * Humano action performed.
+     *
+     * @param evt the evt
+     */
     private void humanoActionPerformed(java.awt.event.ActionEvent evt) {
       jogadorVirtual.setSelected(false);
 
     }
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String args[]) {
 
         try {

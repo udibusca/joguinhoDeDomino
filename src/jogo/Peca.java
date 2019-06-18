@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
 /**
  * Classe responsavel por montar as Pecas.
  * @author acastroa
@@ -38,6 +39,13 @@ public class Peca extends JPanel implements Serializable {
 	int ponta;
 	public static int tamanho = 40;
 
+	/**
+	 * Instantiates a new peca.
+	 *
+	 * @param e1 the e 1
+	 * @param e2 the e 2
+	 * @param pecas the pecas
+	 */
 	public Peca(int e1, int e2, ArrayList pecas) {
 
 		ramdon = new Random();
@@ -95,18 +103,34 @@ public class Peca extends JPanel implements Serializable {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.Component#toString()
+	 */
 	public String toString() {
 		return e1 + "," + e2;
 	}
 
+	/**
+	 * Selecionada.
+	 *
+	 * @param s the s
+	 */
 	public void selecionada(boolean s) {
 		seleccionada = s;
 	}
 
+	/**
+	 * Seleccionada.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean seleccionada() {
 		return seleccionada;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	public boolean equals(Object x) {
 		if (!(x instanceof Peca))
 			return false;
@@ -116,10 +140,18 @@ public class Peca extends JPanel implements Serializable {
 		return false;
 	}
 
+	/**
+	 * Es doble.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean esDoble() {
 		return e1 == e2;
 	}
 
+	/**
+	 * Inverter.
+	 */
 	public void inverter() {
 		b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e2 + ".png")));
 		b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png")));
@@ -129,6 +161,9 @@ public class Peca extends JPanel implements Serializable {
 		validate();
 	}
 
+	/**
+	 * Gira.
+	 */
 	public void gira() {
 		if (horizontal) {
 			setSize(new java.awt.Dimension(tamanho, tamanho * 2));
@@ -191,6 +226,9 @@ public class Peca extends JPanel implements Serializable {
 
 	}
 
+	/**
+	 * Volta.
+	 */
 	public void volta() {
 		if (visible) {
 			b1.setIcon(null);

@@ -3,9 +3,18 @@ package jogo;
 import java.util.ArrayList;
 
 import javax.sound.sampled.AudioSystem;
-
+/**
+ *  Instantiates a new jogador virtual demais jogadores.
+ * @author acastroa
+ *
+ */
 public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 
+	/**
+	 * Instantiates a new jogador virtual demais jogadores.
+	 *
+	 * @param pecas the pecas
+	 */
 	public JogadorVirtualDemaisJogadores(ArrayList pecas) {
 		super(pecas);
 
@@ -13,6 +22,9 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 
 	/**
 	 * Metodo, para mover as pecas e realizar o som.
+	 *
+	 * @param x the x
+	 * @return the peca
 	 */
 	public Peca somPecasMovendo(Peca x) {
 		if (x != null)

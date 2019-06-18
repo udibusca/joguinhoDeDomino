@@ -3,7 +3,11 @@ package jogo;
 import java.util.ArrayList;
 
 import javax.sound.sampled.AudioSystem;
-
+/**
+ * Classe que implementa o som de movimento das peças.
+ * @author acastroa
+ *
+ */
 public class JogadorVirtual extends Jogador {
 
 	private static final long serialVersionUID = 1L;

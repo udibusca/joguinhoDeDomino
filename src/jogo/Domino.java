@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.TimerTask;
 
 import javax.swing.JFrame;
+
 /**
  * Classe responsavel montar a tela e logica do jogo.
  * @author acastroa
@@ -39,6 +40,9 @@ public class Domino extends JFrame {
 	
 	static public ArrayList todas_pecas = new ArrayList();
 
+	/**
+	 * Instantiates a new domino.
+	 */
 	public Domino() {
 		
 		initComponents();
@@ -48,6 +52,9 @@ public class Domino extends JFrame {
 
 	}
 
+	/**
+	 * Inits the components.
+	 */
 	private void initComponents() {
 
 		montaTabuleiro = new javax.swing.JPanel();
@@ -114,6 +121,11 @@ public class Domino extends JFrame {
 		pack();
 	}
 
+	/**
+	 * J button 1 action performed.
+	 *
+	 * @param evt the evt
+	 */
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
 		montaTabuleiro.removeAll();
 		pecas = new ArrayList();
@@ -672,6 +684,8 @@ public class Domino extends JFrame {
 	}
 
 	/**
+	 * The main method.
+	 *
 	 * @param args the command line arguments
 	 */
 
