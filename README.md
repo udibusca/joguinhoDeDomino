@@ -6,7 +6,7 @@ Jogo de Domino, usando RMI e interface Swing.
 - Implementação das chamadas cliente/Servidor usando RMI
 - Melhorar a interface grafica, (tá uma bosta)
 
-# Editor.md
+# Versão do Jogo
 
 ![](https://img.shields.io/badge/Versão-1.0.1-green.svg) 
 
