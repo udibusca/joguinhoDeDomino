@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
+
 /**
  * Classe responsavel montar a tela e logica do jogo.
  * @author acastroa
@@ -27,9 +30,9 @@ public class Domino extends JFrame {
 	
 	Random ramdon = new Random();
 	
-	ArrayList pecas = new ArrayList();
+	ArrayList<Peca> pecas = new ArrayList<Peca>();
 	
-	ArrayList jogadores = new ArrayList();
+	ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
 	
 	int X1, Y1, X2, Y2;
 	
@@ -156,32 +159,32 @@ public class Domino extends JFrame {
 		Peca f04 = new Peca(0, 4, pecas);
 		Peca f05 = new Peca(0, 5, pecas);
 		Peca f06 = new Peca(0, 6, pecas);
-
+		
 		Peca f11 = new Peca(1, 1, pecas);
 		Peca f12 = new Peca(1, 2, pecas);
 		Peca f13 = new Peca(1, 3, pecas);
 		Peca f14 = new Peca(1, 4, pecas);
 		Peca f15 = new Peca(1, 5, pecas);
 		Peca f16 = new Peca(1, 6, pecas);
-
+		
 		Peca f22 = new Peca(2, 2, pecas);
 		Peca f23 = new Peca(2, 3, pecas);
 		Peca f24 = new Peca(2, 4, pecas);
 		Peca f25 = new Peca(2, 5, pecas);
 		Peca f26 = new Peca(2, 6, pecas);
-
+		
 		Peca f33 = new Peca(3, 3, pecas);
 		Peca f34 = new Peca(3, 4, pecas);
 		Peca f35 = new Peca(3, 5, pecas);
 		Peca f36 = new Peca(3, 6, pecas);
-
+		
 		Peca f44 = new Peca(4, 4, pecas);
 		Peca f45 = new Peca(4, 5, pecas);
 		Peca f46 = new Peca(4, 6, pecas);
-
+		
 		Peca f55 = new Peca(5, 5, pecas);
 		Peca f56 = new Peca(5, 6, pecas);
-
+		
 		Peca f66 = new Peca(6, 6, pecas);
 
 		panelJogador_1.removeAll();
@@ -189,10 +192,10 @@ public class Domino extends JFrame {
 
 		voltas = new java.util.Timer();
 
-		ArrayList pecas_1 = new ArrayList();
-		ArrayList pecas_2 = new ArrayList();
-		ArrayList pecas_3 = new ArrayList();
-		ArrayList pecas_4 = new ArrayList();
+		ArrayList<Peca> pecas_1 = new ArrayList<Peca>();
+		ArrayList<Peca> pecas_2 = new ArrayList<Peca>();
+		ArrayList<Peca> pecas_3 = new ArrayList<Peca>();
+		ArrayList<Peca> pecas_4 = new ArrayList<Peca>();
 
 		while (pecas_1.size() < 7) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
@@ -203,20 +206,24 @@ public class Domino extends JFrame {
 				montaTabuleiro.validate();
 			}
 		}
-		for (int i = 0; i < pecas_1.size(); i++) {
-			Peca f = (Peca) pecas_1.get(i);
-			if (!f.visible)
-				f.volta();
-			if (f.horizontal)
-				f.gira();
-			panelJogador_1.add(f);
-		}
+
+		pecas_1.stream().forEach(p -> {
+			if(!p.visible) {
+				p.volta();
+			}
+			if(p.horizontal) {
+				p.gira();
+			}
+			panelJogador_1.add(p);
+			System.out.println("Peca Adicionada : " + p);
+		});
 
 		j1 = new Jogador(pecas_1);
 		Nome n = new Nome(null, true);
 		n.setLocationRelativeTo(null);
 		n.setVisible(true);
-		j1.nome = n.nome.getText() + n.nome.getText().hashCode();
+		// Evitar nomes iguais ::
+		j1.nome = n.nome.getText() +" ID "+ RandomStringUtils.random(2,false,true);
 		nomeJogador_1.setText(j1.nome);
 
 		while (pecas_2.size() < 7) {
@@ -239,18 +246,19 @@ public class Domino extends JFrame {
 			}
 		}
 
-		for (int i = 0; i < pecas_3.size(); i++) {
-			Peca f = (Peca) pecas_3.get(i);
-			if (f.horizontal)
+		pecas_3.stream().forEach(p -> {
+			if(f.horizontal) {
 				f.gira();
+			}
 			panelJogador_2.add(f);
-		}
+		});
 
 		j2 = new JogadorVirtualDemaisJogadores(pecas_3);
 		n = new Nome(null, true);
 		n.setLocationRelativeTo(null);
 		n.setVisible(true);
-		j2.nome = n.nome.getText() + n.nome.getText().hashCode();
+		// Evitar nomes iguais ::
+		j2.nome = n.nome.getText() +" ID "+ RandomStringUtils.random(2,false,true);
 
 		nomeJogador_2.setText(j2.nome);
 
@@ -284,7 +292,8 @@ public class Domino extends JFrame {
 
 		montaTabuleiro.repaint();
 		montaTabuleiro.validate();
-
+		
+		// Schedule para ficar verificando as jogadas
 		voltas.scheduleAtFixedRate(timerTask, 0, 2000);
 
 }
@@ -301,8 +310,6 @@ public class Domino extends JFrame {
 
 		if (cursor != null && (j.Move(cursor.e1) || j.Move(cursor.e2))) {
 			f = j.somPecasMovendo(cursor);
-		    
-		System.out.println("Movimento -> Som "+ f);
 
 		}else if (cursor != null) {
 			javax.swing.JOptionPane.showMessageDialog(null, "Não tenho a peça",
@@ -314,8 +321,7 @@ public class Domino extends JFrame {
 			return;
 		} else if (cursor == null) {
 			f = j.somPecasMovendo(cursor);
-		
-		    System.out.println("Movimento -> Som "+ f);
+			System.out.println("Movimento -> Peca : "+ f +" Jogador : "+ j.nome);			
 		}
 		String s1 = (cursor != null) ? cursor.e1 + "" : "";
 		String s2 = (cursor != null) ? cursor.e2 + "" : "";
@@ -513,7 +519,7 @@ public class Domino extends JFrame {
 					}
 
 				} else {
-					javax.swing.JOptionPane.showMessageDialog(null, "Selecão incorreta", "passa",
+					javax.swing.JOptionPane.showMessageDialog(null, "Selecão incorreta", "INFO",
 							javax.swing.JOptionPane.OK_OPTION);
 					f.seleccionada = false;
 					return;

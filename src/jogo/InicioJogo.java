@@ -10,8 +10,8 @@ import javax.swing.JFrame;
  * <b>  {@link #InicioJogo()} </b>: 
  * Em um jogo de dominó, os quatro Jogadores vão jogar.
  * Escolhendo jogar só, escolhe seu nome como jogador humano
- * e os outros tres jogadores virtuais
- * Ganha quem termina as pecas primeiro
+ * e os outros tres jogadores virtuais Ganha quem termina as pecas primeiro
+ * <b>  Jogo com 28 peças </b>
  * </p>
  * 
  * @author acastroa

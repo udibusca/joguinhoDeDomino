@@ -1,6 +1,13 @@
 package jogo;
 
+import java.awt.Frame;
+
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 /**
  * Classe responsavel por criar o nome jogador/modal
  * @author acastroa
@@ -16,7 +23,7 @@ public class Nome extends JDialog {
 	 * @param parent the parent
 	 * @param modal the modal
 	 */
-	public Nome(java.awt.Frame parent, boolean modal) {
+	public Nome(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -106,9 +113,9 @@ public class Nome extends JDialog {
     public static void main(String args[]) {
 
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -125,7 +132,7 @@ public class Nome extends JDialog {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Nome dialog = new Nome(new javax.swing.JFrame(), true);
+                Nome dialog = new Nome(new JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -140,8 +147,8 @@ public class Nome extends JDialog {
     /**
      * Declaração das variaveis , não mexer
      */
-    public javax.swing.JRadioButton jogadorHumano;
-    private javax.swing.JButton jButton1;
-    public javax.swing.JTextField nome;
-    public javax.swing.JRadioButton jogadorVirtual;
+    public JRadioButton jogadorHumano;
+    private JButton jButton1;
+    public JTextField nome;
+    public JRadioButton jogadorVirtual;
 }
