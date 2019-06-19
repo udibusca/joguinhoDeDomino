@@ -47,20 +47,6 @@ public class InicioJogo extends JFrame {
                 jRadioButton3ActionPerformed(evt);
             }
         });
-        
-        jRadioButton1.setText("Convidar para um jogo");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
-            }
-        });
-
-        jRadioButton2.setText("Participar de um jogo");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("ok");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
