@@ -1,9 +1,7 @@
 package jogo;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -15,7 +13,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.WindowConstants;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
@@ -28,8 +25,8 @@ import javax.swing.border.LineBorder;
  * @author acastroa
  *
  */
-public class Domino extends JFrame {
-
+public class Teste extends JFrame {
+	
 	private static final long serialVersionUID = 1L;
 
 	java.util.Timer voltas;
@@ -57,7 +54,7 @@ public class Domino extends JFrame {
 	/**
 	 * Instantiates a new domino.
 	 */
-	public Domino() {
+	public Teste() {
 		
 		initComponents();
 
@@ -72,6 +69,7 @@ public class Domino extends JFrame {
 	private void initComponents() {
 
 		montaTabuleiro = new JPanel();
+		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelJogador_1 = new JPanel();
 		nomeJogador_1 = new JLabel();
 		panelJogador_2 = new JPanel();
@@ -81,16 +79,14 @@ public class Domino extends JFrame {
 		jButton1 = new JButton();
 		jLabel1 = new JLabel();
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new java.awt.Dimension(1350, 800));
 		getContentPane().setLayout(new AbsoluteLayout());
-		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		montaTabuleiro.setPreferredSize(new Dimension(1000, 800));
+		montaTabuleiro.setPreferredSize(new java.awt.Dimension(800, 800));
 		montaTabuleiro.setLayout(new AbsoluteLayout());
-		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
 
-		panelJogador_2.setPreferredSize(new Dimension(280, 80));
+		panelJogador_2.setPreferredSize(new java.awt.Dimension(280, 80));
 		panelJogador_2.setLayout(new java.awt.GridLayout(1, 7));
 		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 280, 80));
 		panelJogador_2.getAccessibleContext().setAccessibleDescription("");
@@ -105,10 +101,9 @@ public class Domino extends JFrame {
 
 		getContentPane().add(montaTabuleiro, new AbsoluteConstraints(10, 0, 1190, 770));
 
-		jPanel2.setMinimumSize(new java.awt.Dimension(400, 800));
-		jPanel2.setPreferredSize(new java.awt.Dimension(400, 800));
+		jPanel2.setMinimumSize(new java.awt.Dimension(200, 800));
+		jPanel2.setPreferredSize(new java.awt.Dimension(200, 800));
 		jPanel2.setLayout(new AbsoluteLayout());
-		jPanel2.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		jButton1.setText("Iniciar Partida");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -120,9 +115,9 @@ public class Domino extends JFrame {
 
 		jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 		jLabel1.setText("É a vez de....");
-		jPanel2.add(jLabel1, new AbsoluteConstraints(20, 60, 300, 30));
+		jPanel2.add(jLabel1, new AbsoluteConstraints(20, 60, 170, 30));
 
-		getContentPane().add(jPanel2, new AbsoluteConstraints(1190, 0, 400, 770));
+		getContentPane().add(jPanel2, new AbsoluteConstraints(1190, 0, 200, 770));
 
 		pack();
 	}
@@ -666,7 +661,7 @@ public class Domino extends JFrame {
 		 */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new Domino().setVisible(true);
+				new Teste().setVisible(true);
 			}
 		});
 	}
