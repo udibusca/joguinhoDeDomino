@@ -24,3 +24,6 @@ Passo 6 =>
 
 Andre -> Status -> Em andamento.
 ```
+# Documentação do codigo (Não finalizada)
+
+`<JavaDoc>` : <https://github.com/udibusca/joguinhoDeDomino/tree/master/doc>
