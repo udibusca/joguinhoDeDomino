@@ -16,9 +16,9 @@ import javax.sound.sampled.Clip;
  */
 public class Jogador implements Serializable {
 
-	ArrayList fichas;
+	ArrayList<Peca> fichas;
 
-    List pecas;
+	ArrayList<Peca> pecas;
 	String nome;
 	Clip clip;
 	AudioInputStream audio;

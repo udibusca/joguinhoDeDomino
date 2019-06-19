@@ -246,12 +246,12 @@ public class Domino extends JFrame {
 			}
 		}
 
-		pecas_3.stream().forEach(p -> {
-			if(f.horizontal) {
+		for (int i = 0; i < pecas_3.size(); i++) {
+			Peca f = (Peca) pecas_3.get(i);
+			if (f.horizontal)
 				f.gira();
-			}
 			panelJogador_2.add(f);
-		});
+		}
 
 		j2 = new JogadorVirtualDemaisJogadores(pecas_3);
 		n = new Nome(null, true);
