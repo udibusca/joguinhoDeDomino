@@ -1,6 +1,8 @@
 package jogo;
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class Peca extends JPanel implements Serializable {
 	
 	int y, fx, fy;
 	
-	ArrayList pecas;
+	ArrayList<Peca> pecas;
 	
 	Random ramdon;
 
@@ -46,7 +48,7 @@ public class Peca extends JPanel implements Serializable {
 	 * @param e2 the e 2
 	 * @param pecas the pecas
 	 */
-	public Peca(int e1, int e2, ArrayList pecas) {
+	public Peca(int e1, int e2, ArrayList<Peca> pecas) {
 
 		ramdon = new Random();
 		visible = false;
@@ -89,13 +91,14 @@ public class Peca extends JPanel implements Serializable {
 			public void mouseMoved(java.awt.event.MouseEvent evt) {
 			}
 		});
-		b2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-			public void mouseDragged(java.awt.event.MouseEvent evt) {
+		b2.addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseDragged(MouseEvent evt) {
 				ponta = e2;
 				seleccionada = true;
 			}
 
-			public void mouseMoved(java.awt.event.MouseEvent evt) {
+			public void mouseMoved(MouseEvent evt) {
+
 			}
 		});
 
@@ -200,7 +203,7 @@ public class Peca extends JPanel implements Serializable {
 			if (visible)
 				b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png"))); // NOI18N
 			else
-				b1.setBackground(Color.BLACK);
+			b1.setBackground(Color.BLACK);
 			b1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 			b1.setFocusPainted(false);
 			b1.setFocusable(false);

@@ -203,6 +203,9 @@ public class Domino extends JFrame {
 		ArrayList<Peca> pecasJogador_1 = new ArrayList<Peca>();
 		ArrayList<Peca> pecasJogador_2 = new ArrayList<Peca>();
 
+		/**
+		 * Sorteia as pecas para o jogador 1
+		 */
 		while (pecasJogador_1.size() < 7) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
 			if (!pecasJogador_1.contains(f)) {
@@ -232,6 +235,9 @@ public class Domino extends JFrame {
 		j1.nome = n.nome.getText() +" ID "+ RandomStringUtils.random(2,false,true);
 		nomeJogador_1.setText(j1.nome);
 
+		/**
+		 * Sorteia as pecas para o jogador 2
+		 */		
 		while (pecasJogador_2.size() < 7) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
 			if (!pecasJogador_2.contains(f)) {
