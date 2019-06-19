@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -16,11 +17,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
-import javax.swing.border.LineBorder;
 
 
 /**
@@ -52,7 +53,7 @@ public class Domino extends JFrame {
 	
 	int b1 = 0, b2 = 0;
 	
-	static public ArrayList todas_pecas = new ArrayList();
+	static public ArrayList<Object> todas_pecas = new ArrayList<Object>();
 
 	/**
 	 * Instantiates a new domino.
@@ -131,17 +132,17 @@ public class Domino extends JFrame {
 	 *
 	 * @param evt the evt
 	 */
-	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+	private void jButton1ActionPerformed(ActionEvent evt) {
 		montaTabuleiro.removeAll();
-		pecas = new ArrayList();
-		jogadores = new ArrayList();
+		pecas = new ArrayList<Peca>();
+		jogadores = new ArrayList<Jogador>();
 
 		cursor = null;
 		f = null;
 		b1 = 0;
 		b2 = 0;
 		j = null;
-		todas_pecas = new ArrayList();
+		todas_pecas = new ArrayList<Object>();
 
 		panelJogador_1 = new JPanel();
 		panelJogador_2 = new JPanel();
@@ -160,40 +161,46 @@ public class Domino extends JFrame {
 		montaTabuleiro.add(nomeJogador_1, new AbsoluteConstraints(230, 680, 100, 30));
 		montaTabuleiro.add(nomeJogador_2, new AbsoluteConstraints(234, 10, 80, 30));
 
-		Peca f00 = new Peca(0, 0, pecas);
-		Peca f01 = new Peca(0, 1, pecas);
-		Peca f02 = new Peca(0, 2, pecas);
-		Peca f03 = new Peca(0, 3, pecas);
-		Peca f04 = new Peca(0, 4, pecas);
-		Peca f05 = new Peca(0, 5, pecas);
-		Peca f06 = new Peca(0, 6, pecas);
+		/**
+		 * Criar os tipos das pecas disponiveis
+		 */
+	    new Peca(0, 0, pecas);
+	    new Peca(0, 1, pecas);
+	    
+	    new Peca(0, 2, pecas);
+	    new Peca(0, 3, pecas);
+	    new Peca(0, 4, pecas);
+	    new Peca(0, 5, pecas);
+	    new Peca(0, 6, pecas);
+	    
+	    new Peca(1, 1, pecas);
+	    new Peca(1, 2, pecas);
+	    new Peca(1, 3, pecas);
+	    new Peca(1, 4, pecas);
+	    new Peca(1, 5, pecas);
+	    new Peca(1, 6, pecas);
+	    
+	    new Peca(2, 2, pecas);
+	    new Peca(2, 3, pecas);
+	    new Peca(2, 4, pecas);
+	    new Peca(2, 5, pecas);
+	    new Peca(2, 6, pecas);
+	    
+	    new Peca(3, 3, pecas);
+	    new Peca(3, 4, pecas);
+	    new Peca(3, 5, pecas);
+	    new Peca(3, 6, pecas);
+	    
+	    new Peca(4, 4, pecas);
+	    new Peca(4, 5, pecas);
+	    new Peca(4, 6, pecas);
+	    
+	    new Peca(5, 5, pecas);
+	    new Peca(5, 6, pecas);
+	    
+	    new Peca(6, 6, pecas);
 		
-		Peca f11 = new Peca(1, 1, pecas);
-		Peca f12 = new Peca(1, 2, pecas);
-		Peca f13 = new Peca(1, 3, pecas);
-		Peca f14 = new Peca(1, 4, pecas);
-		Peca f15 = new Peca(1, 5, pecas);
-		Peca f16 = new Peca(1, 6, pecas);
-		
-		Peca f22 = new Peca(2, 2, pecas);
-		Peca f23 = new Peca(2, 3, pecas);
-		Peca f24 = new Peca(2, 4, pecas);
-		Peca f25 = new Peca(2, 5, pecas);
-		Peca f26 = new Peca(2, 6, pecas);
-		
-		Peca f33 = new Peca(3, 3, pecas);
-		Peca f34 = new Peca(3, 4, pecas);
-		Peca f35 = new Peca(3, 5, pecas);
-		Peca f36 = new Peca(3, 6, pecas);
-		
-		Peca f44 = new Peca(4, 4, pecas);
-		Peca f45 = new Peca(4, 5, pecas);
-		Peca f46 = new Peca(4, 6, pecas);
-		
-		Peca f55 = new Peca(5, 5, pecas);
-		Peca f56 = new Peca(5, 6, pecas);
-		
-		Peca f66 = new Peca(6, 6, pecas);
+		new Peca(6, 6, pecas);
 
 		panelJogador_1.removeAll();
 		panelJogador_2.removeAll();
@@ -305,7 +312,7 @@ public class Domino extends JFrame {
 			f = j.pecasMovendo(cursor);
 		}else if (cursor != null) {
 			javax.swing.JOptionPane.showMessageDialog(null, "Não tenho a peça",
-					((Jogador) jogadores.get(jogadores_pos)).nome + " Passar", javax.swing.JOptionPane.OK_OPTION);
+					((Jogador) jogadores.get(jogadores_pos)).nome + " PASSAR", javax.swing.JOptionPane.OK_OPTION);
 
 			jogadores_pos++;
 			if (jogadores_pos == jogadores.size())
@@ -529,18 +536,16 @@ public class Domino extends JFrame {
 					Peca.tamanho * j2.fichas.size(), Peca.tamanho * 2));
 
 
-			boolean llevaalguien = false;
+			boolean pagarAlguemGanhador = false;
 
 			for (int i = 0; i < jogadores.size(); i++) {
 				Jogador x = (Jogador) jogadores.get(i);
 				if (cursor != null && (x.Move(cursor.e1) || x.Move(cursor.e2)))
-					llevaalguien = true;
+					pagarAlguemGanhador = true;
 
 			}
 
-			if (j.fichas.isEmpty())
-
-			{
+			if (j.fichas.isEmpty())			{
 				for (int i = 0; i < jogadores.size(); i++)
 					for (int y = 0; y < ((Jogador) jogadores.get(i)).fichas.size(); y++) {
 						Peca fi = (Peca) ((Jogador) jogadores.get(i)).fichas.get(y);
@@ -555,36 +560,35 @@ public class Domino extends JFrame {
 
 				voltas.cancel();
 				montaTabuleiro.removeAll();
-			}
-
-			else if (!llevaalguien) {
-				Hashtable tabla = new Hashtable();
+				
+			} else if (!pagarAlguemGanhador) {
+				Hashtable<Jogador, Integer> placar = new Hashtable<Jogador, Integer>();
 
 				for (int i = 0; i < jogadores.size(); i++) {
 					Jogador x = (Jogador) jogadores.get(i);
-					int puntos = 0;
+					int pontos = 0;
 					for (int p = 0; p < x.fichas.size(); p++) {
 						Peca fx = (Peca) x.fichas.get(p);
-						puntos += fx.e1 + fx.e2;
+						pontos += fx.e1 + fx.e2;
 					}
 
-					tabla.put(x, puntos);
+					placar.put(x, pontos);
 
 				}
 
 				int menor = 100000;
 				Jogador ganhador = null;
 
-				Enumeration e = tabla.keys();
+				Enumeration<Jogador> e = placar.keys();
 				while (e.hasMoreElements()) {
 					Jogador r = (Jogador) e.nextElement();
-					if (menor > (int) tabla.get(r)) {
-						menor = (int) tabla.get(r);
+					if (menor > (int) placar.get(r)) {
+						menor = (int) placar.get(r);
 						ganhador = r;
 					}
 				}
 
-				e = tabla.keys();
+				e = placar.keys();
 
 				for (int i = 0; i < jogadores.size(); i++)
 					for (int y = 0; y < ((Jogador) jogadores.get(i)).fichas.size(); y++) {
@@ -597,11 +601,11 @@ public class Domino extends JFrame {
 
 				while (e.hasMoreElements()) {
 					Jogador z = (Jogador) e.nextElement();
-					int r = (int) tabla.get(z);
+					int r = (int) placar.get(z);
 					if (r == menor) {
 
 						javax.swing.JOptionPane.showMessageDialog(null,
-								"Ganhou " + z.nome + "\n" + "con " + r + " pontos.", "Fim",
+								"Ganhou " + z.nome + "\n" + "con " + r + " pontos.", "FIM JOGO",
 								javax.swing.JOptionPane.OK_OPTION);
 					}
 				}
