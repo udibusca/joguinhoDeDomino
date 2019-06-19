@@ -108,7 +108,6 @@ public class Domino extends JFrame {
 		jPanel2.setMinimumSize(new java.awt.Dimension(400, 800));
 		jPanel2.setPreferredSize(new java.awt.Dimension(400, 800));
 		jPanel2.setLayout(new AbsoluteLayout());
-		jPanel2.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		jButton1.setText("Iniciar Partida");
 		jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -201,22 +200,20 @@ public class Domino extends JFrame {
 
 		voltas = new java.util.Timer();
 
-		ArrayList<Peca> pecas_1 = new ArrayList<Peca>();
-		ArrayList<Peca> pecas_2 = new ArrayList<Peca>();
-		ArrayList<Peca> pecas_3 = new ArrayList<Peca>();
-		ArrayList<Peca> pecas_4 = new ArrayList<Peca>();
+		ArrayList<Peca> pecasJogador_1 = new ArrayList<Peca>();
+		ArrayList<Peca> pecasJogador_2 = new ArrayList<Peca>();
 
-		while (pecas_1.size() < 7) {
+		while (pecasJogador_1.size() < 7) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
-			if (!pecas_1.contains(f)) {
-				pecas_1.add(f);
+			if (!pecasJogador_1.contains(f)) {
+				pecasJogador_1.add(f);
 				pecas.remove(f);
 				montaTabuleiro.remove(f);
 				montaTabuleiro.validate();
 			}
 		}
 
-		pecas_1.stream().forEach(p -> {
+		pecasJogador_1.stream().forEach(p -> {
 			if(!p.visible) {
 				p.volta();
 			}
@@ -224,10 +221,10 @@ public class Domino extends JFrame {
 				p.gira();
 			}
 			panelJogador_1.add(p);
-			System.out.println("Peca Adicionada : " + p);
+			System.out.println("Peca do jogador 1 : " + p);
 		});
 
-		j1 = new Jogador(pecas_1);
+		j1 = new Jogador(pecasJogador_1);
 		Nome n = new Nome(null, true);
 		n.setLocationRelativeTo(null);
 		n.setVisible(true);
@@ -235,34 +232,25 @@ public class Domino extends JFrame {
 		j1.nome = n.nome.getText() +" ID "+ RandomStringUtils.random(2,false,true);
 		nomeJogador_1.setText(j1.nome);
 
-		while (pecas_2.size() < 7) {
+		while (pecasJogador_2.size() < 7) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
-			if (!pecas_2.contains(f)) {
-				pecas_2.add(f);
+			if (!pecasJogador_2.contains(f)) {
+				pecasJogador_2.add(f);
 				pecas.remove(f);
 				montaTabuleiro.remove(f);
 				montaTabuleiro.validate();
 			}
 		}
 
-		while (pecas_3.size() < 7) {
-			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
-			if (!pecas_3.contains(f)) {
-				pecas_3.add(f);
-				pecas.remove(f);
-				montaTabuleiro.remove(f);
-				montaTabuleiro.validate();
+		pecasJogador_2.stream().forEach(p -> {
+			if(p.horizontal) {
+				p.gira();
 			}
-		}
-
-		for (int i = 0; i < pecas_3.size(); i++) {
-			Peca f = (Peca) pecas_3.get(i);
-			if (f.horizontal)
-				f.gira();
-			panelJogador_2.add(f);
-		}
-
-		j2 = new JogadorVirtualDemaisJogadores(pecas_3);
+			panelJogador_2.add(p);
+			System.out.println("Peca do jogador 2 : " + p);
+		});
+		
+		j2 = new JogadorVirtualDemaisJogadores(pecasJogador_2);
 		n = new Nome(null, true);
 		n.setLocationRelativeTo(null);
 		n.setVisible(true);
@@ -270,16 +258,6 @@ public class Domino extends JFrame {
 		j2.nome = n.nome.getText() +" ID "+ RandomStringUtils.random(2,false,true);
 
 		nomeJogador_2.setText(j2.nome);
-
-		while (pecas_4.size() < 7) {
-			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
-			if (!pecas_4.contains(f)) {
-				pecas_4.add(f);
-				pecas.remove(f);
-				montaTabuleiro.remove(f);
-				montaTabuleiro.validate();
-			}
-		}
 
 		jogadores.add(j1);
 		jogadores.add(j2);
@@ -319,7 +297,6 @@ public class Domino extends JFrame {
 
 		if (cursor != null && (j.Move(cursor.e1) || j.Move(cursor.e2))) {
 			f = j.somPecasMovendo(cursor);
-
 		}else if (cursor != null) {
 			javax.swing.JOptionPane.showMessageDialog(null, "Não tenho a peça",
 					((Jogador) jogadores.get(jogadores_pos)).nome + " Passar", javax.swing.JOptionPane.OK_OPTION);
