@@ -5,9 +5,9 @@ import javax.swing.JFrame;
  * Um jogador da partida, ou seja, a IA que decide como jogar.
  * 
  * <hr>
- * <h2>Métodos básicos</h2>
- * <p>{@code void} 
- * <b>{@link #InicioJogo()}</b>: 
+ * <h2> Métodos básicos </h2>
+ * <p>  {@code void} 
+ * <b>  {@link #InicioJogo()} </b>: 
  * Em um jogo de dominó, os quatro Jogadores vão jogar.
  * Escolhendo jogar só, escolhe seu nome como jogador humano
  * e os outros tres jogadores virtuais
@@ -137,7 +137,7 @@ public class InicioJogo extends JFrame {
     }
 
     /**
-     * J radio button 3 action performed.
+     * Jogar Só [Contra a Maquina]
      *
      * @param evt the evt
      */

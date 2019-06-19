@@ -1,7 +1,10 @@
 package jogo;
 
+import java.awt.event.ItemEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -14,6 +17,8 @@ import javax.sound.sampled.Clip;
 public class Jogador implements Serializable {
 
 	ArrayList fichas;
+
+    List pecas;
 	String nome;
 	Clip clip;
 	AudioInputStream audio;
@@ -24,9 +29,7 @@ public class Jogador implements Serializable {
 	 * @param fichas the fichas
 	 */
 	public Jogador(ArrayList fichas) {
-
 		this.fichas = fichas;
-
 	}
 
 	/* (non-Javadoc)
@@ -62,6 +65,7 @@ public class Jogador implements Serializable {
 	 */
 	public Peca somPecasMovendo(Peca x) {
 
+	
 		for (int i = 0; i < fichas.size(); i++) {
 			Peca f = (Peca) fichas.get(i);
 			if (f.seleccionada()) {
