@@ -313,7 +313,7 @@ public class Teste extends JFrame {
 		j = (Jogador) jogadores.get(jogadores_pos);
 
 		if (cursor != null && (j.Move(cursor.e1) || j.Move(cursor.e2))) {
-			f = j.somPecasMovendo(cursor);
+			f = j.pecasMovendo(cursor);
 
 		}else if (cursor != null) {
 			javax.swing.JOptionPane.showMessageDialog(null, "Não tenho a peça",
@@ -324,7 +324,7 @@ public class Teste extends JFrame {
 				jogadores_pos = 0;
 			return;
 		} else if (cursor == null) {
-			f = j.somPecasMovendo(cursor);
+			f = j.pecasMovendo(cursor);
 			System.out.println("Movimento -> Peca : "+ f +" Jogador : "+ j.nome);			
 		}
 		String s1 = (cursor != null) ? cursor.e1 + "" : "";
@@ -340,18 +340,18 @@ public class Teste extends JFrame {
 				cursor = new Peca(f.e1, f.e2, pecas);
 				cursor.setVisible(false);
 
-				if (f.esDoble() && f.horizontal)
+				if (f.saoIguais() && f.horizontal)
 					f.gira();
-				if (!f.esDoble() && !f.horizontal)
+				if (!f.saoIguais() && !f.horizontal)
 					f.gira();
-				if (f.esDoble())
+				if (f.saoIguais())
 					montaTabuleiro.add(f,
 							new AbsoluteConstraints(X1, Y1 - Peca.tamanho / 2, -1, -1));
 				else
 					montaTabuleiro.add(f, new AbsoluteConstraints(X1, Y1, -1, -1));
 				if (!f.visible)
 					f.volta();
-				if (!f.esDoble())
+				if (!f.saoIguais())
 					X2 += Peca.tamanho * 2;
 				else
 					X2 += Peca.tamanho;
@@ -365,7 +365,7 @@ public class Teste extends JFrame {
 				if (cursor.e1 == f.ponta) {
 
 					if (X1 > 220 && b1 == 0) {
-						if (!f.esDoble())
+						if (!f.saoIguais())
 							X1 -= Peca.tamanho * 2;
 						else
 							X1 -= Peca.tamanho;
@@ -378,11 +378,11 @@ public class Teste extends JFrame {
 						if (f.ponta == f.e1)
 							f.inverter();
 
-						if (f.esDoble() && f.horizontal)
+						if (f.saoIguais() && f.horizontal)
 							f.gira();
-						if (!f.esDoble() && !f.horizontal)
+						if (!f.saoIguais() && !f.horizontal)
 							f.gira();
-						if (f.esDoble())
+						if (f.saoIguais())
 							montaTabuleiro.add(f, new AbsoluteConstraints(X1, Y1 - Peca.tamanho / 2,
 									-1, -1));
 						else
@@ -410,17 +410,17 @@ public class Teste extends JFrame {
 						c2 = cursor.e2;
 						if (f.ponta == f.e2)
 							f.inverter();
-						if (f.esDoble() && f.horizontal)
+						if (f.saoIguais() && f.horizontal)
 							f.gira();
-						if (!f.esDoble() && !f.horizontal)
+						if (!f.saoIguais() && !f.horizontal)
 							f.gira();
-						if (f.esDoble())
+						if (f.saoIguais())
 							montaTabuleiro.add(f, new AbsoluteConstraints(X1, Y1 - Peca.tamanho / 2,
 									-1, -1));
 						else
 							montaTabuleiro.add(f, new AbsoluteConstraints(X1, Y1, -1, -1));
 
-						if (!f.esDoble())
+						if (!f.saoIguais())
 							X1 += Peca.tamanho * 2;
 						else
 							X1 += Peca.tamanho;
@@ -455,17 +455,17 @@ public class Teste extends JFrame {
 						if (f.ponta == f.e2)
 							f.inverter();
 
-						if (f.esDoble() && f.horizontal)
+						if (f.saoIguais() && f.horizontal)
 							f.gira();
-						if (!f.esDoble() && !f.horizontal)
+						if (!f.saoIguais() && !f.horizontal)
 							f.gira();
-						if (f.esDoble())
+						if (f.saoIguais())
 							montaTabuleiro.add(f, new AbsoluteConstraints(X2, Y2 - Peca.tamanho / 2,
 									-1, -1));
 						else
 							montaTabuleiro.add(f, new AbsoluteConstraints(X2, Y2, -1, -1));
 
-						if (!f.esDoble())
+						if (!f.saoIguais())
 							X2 += Peca.tamanho * 2;
 						else
 							X2 += Peca.tamanho;
@@ -485,7 +485,7 @@ public class Teste extends JFrame {
 							// X2=X2+Ficha.tamanho;
 						}
 
-						if (!f.esDoble())
+						if (!f.saoIguais())
 							X2 -= Peca.tamanho * 2;
 						else
 							X2 -= Peca.tamanho;
@@ -498,11 +498,11 @@ public class Teste extends JFrame {
 						c1 = cursor.e1;
 						if (f.ponta == f.e1)
 							f.inverter();
-						if (f.esDoble() && f.horizontal)
+						if (f.saoIguais() && f.horizontal)
 							f.gira();
-						if (!f.esDoble() && !f.horizontal)
+						if (!f.saoIguais() && !f.horizontal)
 							f.gira();
-						if (f.esDoble())
+						if (f.saoIguais())
 							montaTabuleiro.add(f, new AbsoluteConstraints(X2, Y2 - Peca.tamanho / 2,
 									-1, -1));
 						else

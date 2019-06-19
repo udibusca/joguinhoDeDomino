@@ -26,20 +26,10 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 	 * @param x the x
 	 * @return the peca
 	 */
-	public Peca somPecasMovendo(Peca x) {
+	public Peca pecasMovendo(Peca x) {
 		if (x != null)
 
 		{
-			try {
-				audio = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("ficha.wav"));
-				clip = AudioSystem.getClip();
-				clip.open(audio);
-				clip.start();
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
 			ArrayList move_ = new ArrayList();
 
 			for (int i = 0; i < fichas.size(); i++) {
@@ -72,15 +62,6 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 				return MAIOR;
 
 		} else {
-			try {
-				audio = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("ficha.wav"));
-				clip = AudioSystem.getClip();
-				clip.open(audio);
-				clip.start();
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
 
 			int mayor = 0;
 			Peca MAYOR = null;

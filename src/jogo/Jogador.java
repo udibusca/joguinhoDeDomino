@@ -63,23 +63,13 @@ public class Jogador implements Serializable {
 	 * @param x the x
 	 * @return the peca
 	 */
-	public Peca somPecasMovendo(Peca x) {
+	public Peca pecasMovendo(Peca x) {
 
 	
 		for (int i = 0; i < fichas.size(); i++) {
 			Peca f = (Peca) fichas.get(i);
 			if (f.seleccionada()) {
 				f.selecionada(false);
-
-				try {
-					audio = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("ficha.wav"));
-					clip = AudioSystem.getClip();
-					clip.open(audio);
-					clip.start();
-
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
 
 				return f;
 			}

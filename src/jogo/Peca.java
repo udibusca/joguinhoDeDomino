@@ -141,11 +141,11 @@ public class Peca extends JPanel implements Serializable {
 	}
 
 	/**
-	 * Es doble.
+	 * Verificar se são iguais.
 	 *
 	 * @return true, if successful
 	 */
-	public boolean esDoble() {
+	public boolean saoIguais() {
 		return e1 == e2;
 	}
 
