@@ -27,9 +27,7 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 	 * @return the peca
 	 */
 	public Peca pecasMovendo(Peca x) {
-		if (x != null)
-
-		{
+		if (x != null){
 			ArrayList move_ = new ArrayList();
 
 			for (int i = 0; i < fichas.size(); i++) {

@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Random;
+import java.util.Timer;
 import java.util.TimerTask;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
@@ -33,7 +36,7 @@ public class Domino extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	java.util.Timer voltas;
+	Timer voltas;
 	
 	Random ramdon = new Random();
 	
@@ -87,18 +90,18 @@ public class Domino extends JFrame {
 		getContentPane().setLayout(new AbsoluteLayout());
 		getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));
 
-		montaTabuleiro.setPreferredSize(new Dimension(1000, 800));
+		montaTabuleiro.setPreferredSize(new Dimension(1300, 800));
 		montaTabuleiro.setLayout(new AbsoluteLayout());
 		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
 
-		panelJogador_2.setPreferredSize(new Dimension(280, 80));
+		panelJogador_2.setPreferredSize(new Dimension(300, 80));
 		panelJogador_2.setLayout(new java.awt.GridLayout(1, 7));
-		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 280, 80));
+		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 300, 80));
 		panelJogador_2.getAccessibleContext().setAccessibleDescription("");
 
-		panelJogador_1.setPreferredSize(new java.awt.Dimension(280, 80));
-		panelJogador_1.setLayout(new java.awt.GridLayout(1, 7));
-		montaTabuleiro.add(panelJogador_1, new AbsoluteConstraints(360, 650, 280, 80));
+		panelJogador_1.setPreferredSize(new Dimension(300, 80));
+		panelJogador_1.setLayout(new GridLayout(1, 7));
+		montaTabuleiro.add(panelJogador_1, new AbsoluteConstraints(360, 650, 300, 80));
 
 		montaTabuleiro.add(nomeJogador_1, new AbsoluteConstraints(230, 680, 100, 30));
 		montaTabuleiro.add(nomeJogador_2, new AbsoluteConstraints(234, 10, 80, 30));
@@ -150,12 +153,12 @@ public class Domino extends JFrame {
 		nomeJogador_2 = new JLabel();
 
 		panelJogador_2.setPreferredSize(new java.awt.Dimension(280, 80));
-		panelJogador_2.setLayout(new java.awt.GridLayout(1, 7));
+		panelJogador_2.setLayout(new java.awt.GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 280, 80));
 		panelJogador_2.getAccessibleContext().setAccessibleDescription("");
 
 		panelJogador_1.setPreferredSize(new java.awt.Dimension(280, 80));
-		panelJogador_1.setLayout(new java.awt.GridLayout(1, 7));
+		panelJogador_1.setLayout(new java.awt.GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador_1, new AbsoluteConstraints(360, 650, 280, 80));
 
 		montaTabuleiro.add(nomeJogador_1, new AbsoluteConstraints(230, 680, 100, 30));
@@ -205,7 +208,7 @@ public class Domino extends JFrame {
 		panelJogador_1.removeAll();
 		panelJogador_2.removeAll();
 
-		voltas = new java.util.Timer();
+		voltas = new Timer();
 
 		ArrayList<Peca> pecasJogador_1 = new ArrayList<Peca>();
 		ArrayList<Peca> pecasJogador_2 = new ArrayList<Peca>();
@@ -213,7 +216,7 @@ public class Domino extends JFrame {
 		/**
 		 * Sorteia as pecas para o jogador 1
 		 */
-		while (pecasJogador_1.size() < 7) {
+		while (pecasJogador_1.size() < 14) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
 			if (!pecasJogador_1.contains(f)) {
 				pecasJogador_1.add(f);
@@ -245,7 +248,7 @@ public class Domino extends JFrame {
 		/**
 		 * Sorteia as pecas para o jogador 2
 		 */		
-		while (pecasJogador_2.size() < 7) {
+		while (pecasJogador_2.size() < 14) {
 			Peca f = (Peca) pecas.get((int) (ramdon.nextFloat() * pecas.size()));
 			if (!pecasJogador_2.contains(f)) {
 				pecasJogador_2.add(f);
@@ -275,6 +278,13 @@ public class Domino extends JFrame {
 		jogadores.add(j1);
 		jogadores.add(j2);
 
+		/**
+		 * Verificar quem tem a peça 6|6 para iniciar o jogo.
+		 */
+		jogadores.stream().forEach(j -> j.getFichas().forEach(f-> {
+			System.err.println("Peca > " + f + " Jogador > " + j.getNome());
+		}));
+		
 		jogadores_pos = (int) (jogadores.size() * ramdon.nextFloat());
 
 		TimerTask timerTask = new TimerTask() {
@@ -306,13 +316,13 @@ public class Domino extends JFrame {
 	 */
 	void voltas() {
 
-		j = (Jogador) jogadores.get(jogadores_pos);
+		j = jogadores.get(jogadores_pos);
 
 		if (cursor != null && (j.Move(cursor.e1) || j.Move(cursor.e2))) {
 			f = j.pecasMovendo(cursor);
 		}else if (cursor != null) {
-			javax.swing.JOptionPane.showMessageDialog(null, "Não tenho a peça",
-					((Jogador) jogadores.get(jogadores_pos)).nome + " PASSAR", javax.swing.JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Não tenho a peça",
+					jogadores.get(jogadores_pos).nome + " PASSAR", JOptionPane.OK_OPTION);
 
 			jogadores_pos++;
 			if (jogadores_pos == jogadores.size())
@@ -518,8 +528,7 @@ public class Domino extends JFrame {
 					}
 
 				} else {
-					javax.swing.JOptionPane.showMessageDialog(null, "Selecão incorreta", "INFO",
-							javax.swing.JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(null, "Selecão incorreta", "INFO", JOptionPane.OK_OPTION);
 					f.seleccionada = false;
 					return;
 				}

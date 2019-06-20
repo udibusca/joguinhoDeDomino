@@ -17,11 +17,8 @@ import javax.sound.sampled.Clip;
 public class Jogador implements Serializable {
 
 	ArrayList<Peca> fichas;
-
 	ArrayList<Peca> pecas;
 	String nome;
-	Clip clip;
-	AudioInputStream audio;
 
 	/**
 	 * Instantiates a new jogador.
@@ -75,6 +72,30 @@ public class Jogador implements Serializable {
 			}
 		}
 		return null;
+	}
+	
+	public ArrayList<Peca> getFichas() {
+		return fichas;
+	}
+
+	public void setFichas(ArrayList<Peca> fichas) {
+		this.fichas = fichas;
+	}
+
+	public ArrayList<Peca> getPecas() {
+		return pecas;
+	}
+
+	public void setPecas(ArrayList<Peca> pecas) {
+		this.pecas = pecas;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
