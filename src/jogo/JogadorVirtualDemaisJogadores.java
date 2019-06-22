@@ -30,16 +30,16 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 		if (x != null){
 			ArrayList move_ = new ArrayList();
 
-			for (int i = 0; i < fichas.size(); i++) {
-				Peca f = (Peca) fichas.get(i);
+			for (int i = 0; i < pecas.size(); i++) {
+				Peca f = (Peca) pecas.get(i);
 
-				if (f.e1 == x.e1 || f.e1 == x.e2) {
-					f.ponta = f.e1;
+				if (f.lado1 == x.lado1 || f.lado1 == x.lado2) {
+					f.ponta = f.lado1;
 					move_.add(f);
 				}
 
-				if (f.e2 == x.e1 || f.e2 == x.e2) {
-					f.ponta = f.e2;
+				if (f.lado2 == x.lado1 || f.lado2 == x.lado2) {
+					f.ponta = f.lado2;
 					move_.add(f);
 
 				}
@@ -49,7 +49,7 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 			Peca MAIOR = null;
 			for (int i = 0; i < move_.size(); i++) {
 				Peca f = (Peca) move_.get(i);
-				int aux = f.e1 + f.e2;
+				int aux = f.lado1 + f.lado2;
 				if (maior < aux) {
 					maior = aux;
 					MAIOR = f;
@@ -62,17 +62,17 @@ public class JogadorVirtualDemaisJogadores extends JogadorVirtual {
 		} else {
 
 			int mayor = 0;
-			Peca MAYOR = null;
-			for (int i = 0; i < fichas.size(); i++) {
-				Peca f = (Peca) fichas.get(i);
-				int aux = f.e1 + f.e2;
+			Peca MAIOR = null;
+			for (int i = 0; i < pecas.size(); i++) {
+				Peca f = (Peca) pecas.get(i);
+				int aux = f.lado1 + f.lado2;
 				if (mayor < aux) {
 					mayor = aux;
-					MAYOR = f;
+					MAIOR = f;
 				}
 			}
-			MAYOR.ponta = MAYOR.e1;
-			return MAYOR;
+			MAIOR.ponta = MAIOR.lado1;
+			return MAIOR;
 		}
 
 		return null;

@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 public class Peca extends JPanel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	public int e1, e2;
+	public int lado1, lado2;
 	
 	JButton b1;
 	
@@ -41,20 +41,13 @@ public class Peca extends JPanel implements Serializable {
 	int ponta;
 	public static int tamanho = 40;
 
-	/**
-	 * Instantiates a new peca.
-	 *
-	 * @param e1 the e 1
-	 * @param e2 the e 2
-	 * @param pecas the pecas
-	 */
 	public Peca(int e1, int e2, ArrayList<Peca> pecas) {
 
 		ramdon = new Random();
 		visible = false;
 		seleccionada = false;
-		this.e1 = e1;
-		this.e2 = e2;
+		this.lado1 = e1;
+		this.lado2 = e2;
 		this.pecas = pecas;
 		b1 = new JButton();
 		b2 = new JButton();
@@ -106,11 +99,8 @@ public class Peca extends JPanel implements Serializable {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see java.awt.Component#toString()
-	 */
 	public String toString() {
-		return e1 + "," + e2;
+		return lado1 + "," + lado2;
 	}
 
 	/**
@@ -131,14 +121,11 @@ public class Peca extends JPanel implements Serializable {
 		return seleccionada;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	public boolean equals(Object x) {
 		if (!(x instanceof Peca))
 			return false;
 		Peca f = (Peca) x;
-		if ((e1 == f.e1 && e2 == f.e2) || (e1 == f.e2 && e2 == f.e1))
+		if ((lado1 == f.lado1 && lado2 == f.lado2) || (lado1 == f.lado2 && lado2 == f.lado1))
 			return true;
 		return false;
 	}
@@ -149,18 +136,18 @@ public class Peca extends JPanel implements Serializable {
 	 * @return true, if successful
 	 */
 	public boolean saoIguais() {
-		return e1 == e2;
+		return lado1 == lado2;
 	}
 
 	/**
 	 * Inverter.
 	 */
 	public void inverter() {
-		b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e2 + ".png")));
-		b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png")));
-		int temp = e1;
-		e1 = e2;
-		e2 = temp;
+		b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado2 + ".png")));
+		b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado1 + ".png")));
+		int temp = lado1;
+		lado1 = lado2;
+		lado2 = temp;
 		validate();
 	}
 
@@ -173,7 +160,7 @@ public class Peca extends JPanel implements Serializable {
 			setLayout(new java.awt.GridLayout(2, 1));
 
 			if (visible)
-				b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png")));
+				b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado1 + ".png")));
 			    b1.setBackground(Color.BLACK);
 
 			b1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -185,7 +172,7 @@ public class Peca extends JPanel implements Serializable {
 			add(b1);
 
 			if (visible)
-				b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(e2 + ".png"))); // NOI18N
+				b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado2 + ".png"))); // NOI18N
 			else
 				b2.setBackground(Color.BLACK);
 			b2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -201,7 +188,7 @@ public class Peca extends JPanel implements Serializable {
 			setLayout(new java.awt.GridLayout(1, 2));
 
 			if (visible)
-				b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png"))); // NOI18N
+				b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado1 + ".png"))); // NOI18N
 			else
 			b1.setBackground(Color.BLACK);
 			b1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -213,7 +200,7 @@ public class Peca extends JPanel implements Serializable {
 			add(b1);
 
 			if (visible)
-				b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(e2 + ".png"))); // NOI18N
+				b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado2 + ".png"))); // NOI18N
 			else
 				b2.setBackground(Color.BLACK);
 			b2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -243,8 +230,8 @@ public class Peca extends JPanel implements Serializable {
 
 			visible = false;
 		} else {
-			b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(e1 + ".png")));
-			b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(e2 + ".png")));
+			b1.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado1 + ".png")));
+			b2.setIcon(new javax.swing.ImageIcon(getClass().getResource(lado2 + ".png")));
 			add(b1);
 			add(b2);
 			visible = true;

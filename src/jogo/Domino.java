@@ -37,23 +37,14 @@ public class Domino extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	Timer voltas;
-	
 	Random ramdon = new Random();
-	
 	ArrayList<Peca> pecas = new ArrayList<Peca>();
-	
 	ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
-	
 	int X1, Y1, X2, Y2;
-	
 	Jogador j1, j2;
-	
 	int jogadores_pos = 0;
-	
 	Peca cursor = null;
-	
 	Peca f = null;
-	
 	int b1 = 0, b2 = 0;
 	
 	static public ArrayList<Object> todas_pecas = new ArrayList<Object>();
@@ -95,12 +86,12 @@ public class Domino extends JFrame {
 		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		panelJogador_2.setPreferredSize(new Dimension(300, 80));
-		panelJogador_2.setLayout(new java.awt.GridLayout(1, 7));
+		panelJogador_2.setLayout(new java.awt.GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 300, 80));
 		panelJogador_2.getAccessibleContext().setAccessibleDescription("");
 
 		panelJogador_1.setPreferredSize(new Dimension(300, 80));
-		panelJogador_1.setLayout(new GridLayout(1, 7));
+		panelJogador_1.setLayout(new GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador_1, new AbsoluteConstraints(360, 650, 300, 80));
 
 		montaTabuleiro.add(nomeJogador_1, new AbsoluteConstraints(230, 680, 100, 30));
@@ -278,13 +269,6 @@ public class Domino extends JFrame {
 		jogadores.add(j1);
 		jogadores.add(j2);
 
-		/**
-		 * Verificar quem tem a peça 6|6 para iniciar o jogo.
-		 */
-		jogadores.stream().forEach(j -> j.getFichas().forEach(f-> {
-			System.err.println("Peca > " + f + " Jogador > " + j.getNome());
-		}));
-		
 		jogadores_pos = (int) (jogadores.size() * ramdon.nextFloat());
 
 		TimerTask timerTask = new TimerTask() {
@@ -318,7 +302,7 @@ public class Domino extends JFrame {
 
 		j = jogadores.get(jogadores_pos);
 
-		if (cursor != null && (j.Move(cursor.e1) || j.Move(cursor.e2))) {
+		if (cursor != null && (j.Move(cursor.lado1) || j.Move(cursor.lado2))) {
 			f = j.pecasMovendo(cursor);
 		}else if (cursor != null) {
 			JOptionPane.showMessageDialog(null, "Não tenho a peça",
@@ -332,8 +316,8 @@ public class Domino extends JFrame {
 			f = j.pecasMovendo(cursor);
 			System.out.println("Movimento -> Peca : "+ f +" Jogador : "+ j.nome);			
 		}
-		String s1 = (cursor != null) ? cursor.e1 + "" : "";
-		String s2 = (cursor != null) ? cursor.e2 + "" : "";
+		String s1 = (cursor != null) ? cursor.lado1 + "" : "";
+		String s2 = (cursor != null) ? cursor.lado2 + "" : "";
 		jLabel1.setForeground(Color.red);
 
 		jLabel1.setText("Aguad. o jogador " + j.nome + " Peça: " + s1 + "|" + s2);
@@ -342,7 +326,7 @@ public class Domino extends JFrame {
 		if (f != null) {
 
 			if (cursor == null) {
-				cursor = new Peca(f.e1, f.e2, pecas);
+				cursor = new Peca(f.lado1, f.lado2, pecas);
 				cursor.setVisible(false);
 
 				if (f.saoIguais() && f.horizontal)
@@ -362,25 +346,25 @@ public class Domino extends JFrame {
 					X2 += Peca.tamanho;
 
 				montaTabuleiro.validate();
-				j.fichas.remove(f);
+				j.pecas.remove(f);
 
 			} else {
 				int c1, c2;
 
-				if (cursor.e1 == f.ponta) {
+				if (cursor.lado1 == f.ponta) {
 
 					if (X1 > 220 && b1 == 0) {
 						if (!f.saoIguais())
 							X1 -= Peca.tamanho * 2;
 						else
 							X1 -= Peca.tamanho;
-						if (f.e1 == f.ponta) {
-							c1 = f.e2;
+						if (f.lado1 == f.ponta) {
+							c1 = f.lado2;
 						} else {
-							c1 = f.e1;
+							c1 = f.lado1;
 						}
-						c2 = cursor.e2;
-						if (f.ponta == f.e1)
+						c2 = cursor.lado2;
+						if (f.ponta == f.lado1)
 							f.inverter();
 
 						if (f.saoIguais() && f.horizontal)
@@ -397,9 +381,9 @@ public class Domino extends JFrame {
 							f.volta();
 
 						montaTabuleiro.validate();
-						j.fichas.remove(f);
-						cursor.e1 = c1;
-						cursor.e2 = c2;
+						j.pecas.remove(f);
+						cursor.lado1 = c1;
+						cursor.lado2 = c2;
 					} else {
 						b1 = 1;
 						if (X1 <= 220) {
@@ -407,13 +391,13 @@ public class Domino extends JFrame {
 							// X1-=Ficha.tamanho;
 						}
 
-						if (f.e1 == f.ponta) {
-							c1 = f.e2;
+						if (f.lado1 == f.ponta) {
+							c1 = f.lado2;
 						} else {
-							c1 = f.e1;
+							c1 = f.lado1;
 						}
-						c2 = cursor.e2;
-						if (f.ponta == f.e2)
+						c2 = cursor.lado2;
+						if (f.ponta == f.lado2)
 							f.inverter();
 						if (f.saoIguais() && f.horizontal)
 							f.gira();
@@ -440,24 +424,24 @@ public class Domino extends JFrame {
 						}
 
 						montaTabuleiro.validate();
-						j.fichas.remove(f);
-						cursor.e1 = c1;
-						cursor.e2 = c2;
+						j.pecas.remove(f);
+						cursor.lado1 = c1;
+						cursor.lado2 = c2;
 
 					}
 
 				}
 
-				else if (cursor.e2 == f.ponta) {
+				else if (cursor.lado2 == f.ponta) {
 					if (X2 < montaTabuleiro.getWidth() - 280 && b2 == 0) {
 
-						if (f.e1 == f.ponta) {
-							c2 = f.e2;
+						if (f.lado1 == f.ponta) {
+							c2 = f.lado2;
 						} else {
-							c2 = f.e1;
+							c2 = f.lado1;
 						}
-						c1 = cursor.e1;
-						if (f.ponta == f.e2)
+						c1 = cursor.lado1;
+						if (f.ponta == f.lado2)
 							f.inverter();
 
 						if (f.saoIguais() && f.horizontal)
@@ -479,9 +463,9 @@ public class Domino extends JFrame {
 							f.volta();
 
 						montaTabuleiro.validate();
-						j.fichas.remove(f);
-						cursor.e1 = c1;
-						cursor.e2 = c2;
+						j.pecas.remove(f);
+						cursor.lado1 = c1;
+						cursor.lado2 = c2;
 
 					} else {
 						b2 = 1;
@@ -495,13 +479,13 @@ public class Domino extends JFrame {
 						else
 							X2 -= Peca.tamanho;
 
-						if (f.e1 == f.ponta) {
-							c2 = f.e2;
+						if (f.lado1 == f.ponta) {
+							c2 = f.lado2;
 						} else {
-							c2 = f.e1;
+							c2 = f.lado1;
 						}
-						c1 = cursor.e1;
-						if (f.ponta == f.e1)
+						c1 = cursor.lado1;
+						if (f.ponta == f.lado1)
 							f.inverter();
 						if (f.saoIguais() && f.horizontal)
 							f.gira();
@@ -522,9 +506,9 @@ public class Domino extends JFrame {
 						}
 
 						montaTabuleiro.validate();
-						j.fichas.remove(f);
-						cursor.e1 = c1;
-						cursor.e2 = c2;
+						j.pecas.remove(f);
+						cursor.lado1 = c1;
+						cursor.lado2 = c2;
 					}
 
 				} else {
@@ -535,37 +519,36 @@ public class Domino extends JFrame {
 			}
 
 			panelJogador_1.repaint();
-			panelJogador_1.setLayout(new java.awt.GridLayout(1, j1.fichas.size(), 0, 0));
+			panelJogador_1.setLayout(new java.awt.GridLayout(1, j1.pecas.size(), 0, 0));
 			montaTabuleiro.add(panelJogador_1, new AbsoluteConstraints(360, 650,
-					Peca.tamanho * j1.fichas.size(), Peca.tamanho * 2));
+					Peca.tamanho * j1.pecas.size(), Peca.tamanho * 2));
 
 			panelJogador_2.repaint();
-			panelJogador_2.setLayout(new java.awt.GridLayout(1, j2.fichas.size(), 0, 0));
+			panelJogador_2.setLayout(new java.awt.GridLayout(1, j2.pecas.size(), 0, 0));
 			montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0,
-					Peca.tamanho * j2.fichas.size(), Peca.tamanho * 2));
+					Peca.tamanho * j2.pecas.size(), Peca.tamanho * 2));
 
 
 			boolean pagarAlguemGanhador = false;
 
 			for (int i = 0; i < jogadores.size(); i++) {
 				Jogador x = (Jogador) jogadores.get(i);
-				if (cursor != null && (x.Move(cursor.e1) || x.Move(cursor.e2)))
+				if (cursor != null && (x.Move(cursor.lado1) || x.Move(cursor.lado2)))
 					pagarAlguemGanhador = true;
 
 			}
 
-			if (j.fichas.isEmpty())			{
+			if (j.pecas.isEmpty())			{
 				for (int i = 0; i < jogadores.size(); i++)
-					for (int y = 0; y < ((Jogador) jogadores.get(i)).fichas.size(); y++) {
-						Peca fi = (Peca) ((Jogador) jogadores.get(i)).fichas.get(y);
+					for (int y = 0; y < ((Jogador) jogadores.get(i)).pecas.size(); y++) {
+						Peca fi = (Peca) ((Jogador) jogadores.get(i)).pecas.get(y);
 
 						if (!fi.visible)
 							fi.volta();
 
 					}
 
-				javax.swing.JOptionPane.showMessageDialog(null, "Ganhou " + j.nome, "Fim",
-						javax.swing.JOptionPane.OK_OPTION);
+				JOptionPane.showMessageDialog(null, "Ganhou " + j.nome, "Fim",JOptionPane.OK_OPTION);
 
 				voltas.cancel();
 				montaTabuleiro.removeAll();
@@ -576,9 +559,9 @@ public class Domino extends JFrame {
 				for (int i = 0; i < jogadores.size(); i++) {
 					Jogador x = (Jogador) jogadores.get(i);
 					int pontos = 0;
-					for (int p = 0; p < x.fichas.size(); p++) {
-						Peca fx = (Peca) x.fichas.get(p);
-						pontos += fx.e1 + fx.e2;
+					for (int p = 0; p < x.pecas.size(); p++) {
+						Peca fx = (Peca) x.pecas.get(p);
+						pontos += fx.lado1 + fx.lado2;
 					}
 
 					placar.put(x, pontos);
@@ -600,8 +583,8 @@ public class Domino extends JFrame {
 				e = placar.keys();
 
 				for (int i = 0; i < jogadores.size(); i++)
-					for (int y = 0; y < ((Jogador) jogadores.get(i)).fichas.size(); y++) {
-						Peca fi = (Peca) ((Jogador) jogadores.get(i)).fichas.get(y);
+					for (int y = 0; y < ((Jogador) jogadores.get(i)).pecas.size(); y++) {
+						Peca fi = (Peca) ((Jogador) jogadores.get(i)).pecas.get(y);
 
 						if (!fi.visible)
 							fi.volta();
@@ -612,10 +595,8 @@ public class Domino extends JFrame {
 					Jogador z = (Jogador) e.nextElement();
 					int r = (int) placar.get(z);
 					if (r == menor) {
-
-						javax.swing.JOptionPane.showMessageDialog(null,
-								"Ganhou " + z.nome + "\n" + "con " + r + " pontos.", "FIM JOGO",
-								javax.swing.JOptionPane.OK_OPTION);
+						JOptionPane.showMessageDialog(null,	"Ganhou " + z.nome + "\n" + "con " + r + " pontos.", "FIM JOGO",
+								JOptionPane.OK_OPTION);
 					}
 				}
 

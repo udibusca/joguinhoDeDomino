@@ -1,14 +1,7 @@
 package jogo;
 
-import java.awt.event.ItemEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 /**
  * Classe responsavel para Criar/iniciar um jogador
  * @author acastroa
@@ -16,24 +9,21 @@ import javax.sound.sampled.Clip;
  */
 public class Jogador implements Serializable {
 
-	ArrayList<Peca> fichas;
+	private static final long serialVersionUID = 1L;
+	
 	ArrayList<Peca> pecas;
 	String nome;
 
 	/**
 	 * Instantiates a new jogador.
 	 *
-	 * @param fichas the fichas
+	 * @param pecas the fichas
 	 */
-	public Jogador(ArrayList fichas) {
-		this.fichas = fichas;
+	public Jogador(ArrayList pecas) {
+		this.pecas = pecas;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	public boolean equals(Object x) {
-
 		return nome.equals(((Jogador) x).nome);
 
 	}
@@ -45,13 +35,13 @@ public class Jogador implements Serializable {
 	 * @return true, if successful
 	 */
 	public boolean Move(int x) {
-		boolean lleva = false;
-		for (int i = 0; i < fichas.size(); i++) {
-			Peca f = (Peca) fichas.get(i);
-			if (f.e1 == x || f.e2 == x)
-				lleva = true;
+		boolean valida = false;
+		for (int i = 0; i < pecas.size(); i++) {
+			Peca f = (Peca) pecas.get(i);
+			if (f.lado1 == x || f.lado2 == x)
+				valida = true;
 		}
-		return lleva;
+		return valida;
 	}
 	
 	/**
@@ -62,9 +52,8 @@ public class Jogador implements Serializable {
 	 */
 	public Peca pecasMovendo(Peca x) {
 
-	
-		for (int i = 0; i < fichas.size(); i++) {
-			Peca f = (Peca) fichas.get(i);
+		for (int i = 0; i < pecas.size(); i++) {
+			Peca f = (Peca) pecas.get(i);
 			if (f.seleccionada()) {
 				f.selecionada(false);
 
@@ -72,30 +61,6 @@ public class Jogador implements Serializable {
 			}
 		}
 		return null;
-	}
-	
-	public ArrayList<Peca> getFichas() {
-		return fichas;
-	}
-
-	public void setFichas(ArrayList<Peca> fichas) {
-		this.fichas = fichas;
-	}
-
-	public ArrayList<Peca> getPecas() {
-		return pecas;
-	}
-
-	public void setPecas(ArrayList<Peca> pecas) {
-		this.pecas = pecas;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 
 }

@@ -1,6 +1,16 @@
 package jogo;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 /**
  * Um jogador da partida, ou seja, a IA que decide como jogar.
  * 
@@ -34,56 +44,66 @@ public class InicioJogo extends JFrame {
      */
     private void initComponents() {
 
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radioButtonChamaServidor = new JRadioButton();
+        radioButtonChamaCliente = new JRadioButton();
+        jButton1 = new JButton();
+        jLabel1 = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        jRadioButton3.setText("Jogar Só [Contra a Maquina]");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+        setTitle(":: Jogo Dominó ::");
+        jLabel1.setText("ESCOLHA COMO QUER JOGAR");
+        
+        radioButtonChamaServidor.setText("Convidar para um jogo");
+        radioButtonChamaServidor.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        radioButtonChamaCliente.setText("Participar de um jogo");
+        radioButtonChamaCliente.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
             }
         });
 
         jButton1.setText("ok");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(98, 98, 98)
+                            .addComponent(jButton1))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(74, 74, 74)
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                .addComponent(radioButtonChamaCliente, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(radioButtonChamaServidor, GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                                .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addContainerGap(53, Short.MAX_VALUE))
+            );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButton3)
-                .addGap(32, 32, 32)
-                .addComponent(jRadioButton1)
-                .addGap(27, 27, 27)
-                .addComponent(jRadioButton2)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addContainerGap()
+                    .addComponent(jLabel1)
+                    .addGap(32, 32, 32)
+                    .addComponent(radioButtonChamaServidor)
+                    .addGap(27, 27, 27)
+                    .addComponent(radioButtonChamaCliente)
+                    .addGap(27, 27, 27)
+                    .addComponent(jButton1)
+                    .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,12 +114,16 @@ public class InicioJogo extends JFrame {
      *
      * @param evt the evt
      */
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jButton1ActionPerformed(ActionEvent evt) {
             dispose();
             //TODO Para implementar usando RMI
-            //if (jRadioButton1.isSelected()) new DominoServidor().setVisible(true);
-            //if (jRadioButton2.isSelected()) new DominoCliente().setVisible(true);
-            if (jRadioButton3.isSelected()) new Domino().setVisible(true);
+            
+            // Convidar para um jogo
+            if (radioButtonChamaServidor.isSelected()) new DominoServidor().setVisible(true);
+            
+            // Participar de um jogo
+            if (radioButtonChamaCliente.isSelected()) new DominoCliente().setVisible(true);
+
     }
 
     /**
@@ -107,9 +131,8 @@ public class InicioJogo extends JFrame {
      *
      * @param evt the evt
      */
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-          jRadioButton2.setSelected(false);
-          jRadioButton3.setSelected(false);
+    private void jRadioButton1ActionPerformed(ActionEvent evt) {
+          radioButtonChamaCliente.setSelected(false);
     }
 
     /**
@@ -117,32 +140,16 @@ public class InicioJogo extends JFrame {
      *
      * @param evt the evt
      */
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {
-        jRadioButton1.setSelected(false);
-        jRadioButton3.setSelected(false);
+    private void jRadioButton2ActionPerformed(ActionEvent evt) {
+        radioButtonChamaServidor.setSelected(false);
     }
 
-    /**
-     * Jogar Só [Contra a Maquina]
-     *
-     * @param evt the evt
-     */
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {
-       jRadioButton1.setSelected(false);
-       jRadioButton2.setSelected(false);
-    }
-
-    /**
-     * The main method.
-     *
-     * @param args the arguments
-     */
     public static void main(String args[]) {
 
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -152,7 +159,7 @@ public class InicioJogo extends JFrame {
             java.util.logging.Logger.getLogger(InicioJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(InicioJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(InicioJogo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -164,9 +171,9 @@ public class InicioJogo extends JFrame {
     }
 
     // Variáveis de declaração - não modificam
-    private javax.swing.JButton jButton1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private JButton jButton1;
+    private JRadioButton radioButtonChamaServidor;
+    private JRadioButton radioButtonChamaCliente;
+    private JLabel jLabel1;
 
 }
