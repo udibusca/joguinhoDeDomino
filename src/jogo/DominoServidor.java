@@ -36,7 +36,7 @@ public class DominoServidor extends JFrame {
 	ArrayList<Peca> pecas = new ArrayList<Peca>();
 	ArrayList<Jogador> jogadores = new ArrayList<Jogador>();
 	int X1, Y1, X2, Y2;
-	Jogador j1, j3;
+	Jogador j1, j2;
 	int jogador_pos = 0;
 	Peca cursor = null;
 	Peca f = null;
@@ -60,9 +60,9 @@ public class DominoServidor extends JFrame {
 	private void initComponents() {
 
 		montaTabuleiro = new JPanel();
-		panelJogador3 = new JPanel();
+		panelJogador2 = new JPanel();
 		panelJogador1 = new JPanel();
-		nomeJogador_3 = new JLabel();
+		nomeJogador_2 = new JLabel();
 		nomeJogador_1 = new JLabel();
 		Jpainel_2 = new JPanel();
 		jButton1 = new JButton();
@@ -77,16 +77,16 @@ public class DominoServidor extends JFrame {
 		montaTabuleiro.setLayout(new AbsoluteLayout());
 		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
 
-		panelJogador3.setPreferredSize(new java.awt.Dimension(300, 80));
-		panelJogador3.setLayout(new java.awt.GridLayout(1, 14));
-		montaTabuleiro.add(panelJogador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 300, 80));
-		panelJogador3.getAccessibleContext().setAccessibleDescription("");
+		panelJogador2.setPreferredSize(new java.awt.Dimension(300, 80));
+		panelJogador2.setLayout(new java.awt.GridLayout(1, 14));
+		montaTabuleiro.add(panelJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 1, 300, 80));
+		panelJogador2.getAccessibleContext().setAccessibleDescription("");
 
 		panelJogador1.setPreferredSize(new java.awt.Dimension(300, 80));
 		panelJogador1.setLayout(new java.awt.GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 650, 300, 80));
 
-		montaTabuleiro.add(nomeJogador_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 10, 80, 30));
+		montaTabuleiro.add(nomeJogador_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 10, 80, 30));
 		montaTabuleiro.add(nomeJogador_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 100, 30));
 
 		getContentPane().add(montaTabuleiro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1190, 770));
@@ -129,21 +129,21 @@ public class DominoServidor extends JFrame {
 		j = null;
 		todas_pecas = new ArrayList();
 
-		panelJogador3 = new javax.swing.JPanel();
+		panelJogador2 = new javax.swing.JPanel();
 		panelJogador1 = new javax.swing.JPanel();
-		nomeJogador_3 = new JLabel();
+		nomeJogador_2 = new JLabel();
 		nomeJogador_1 = new JLabel();
 
-		panelJogador3.setPreferredSize(new java.awt.Dimension(300, 80));
-		panelJogador3.setLayout(new java.awt.GridLayout(1, 14));
-		montaTabuleiro.add(panelJogador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 280, 80));
-		panelJogador3.getAccessibleContext().setAccessibleDescription("");
+		panelJogador2.setPreferredSize(new java.awt.Dimension(300, 80));
+		panelJogador2.setLayout(new java.awt.GridLayout(1, 14));
+		montaTabuleiro.add(panelJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 280, 80));
+		panelJogador2.getAccessibleContext().setAccessibleDescription("");
 
 		panelJogador1.setPreferredSize(new java.awt.Dimension(300, 80));
 		panelJogador1.setLayout(new java.awt.GridLayout(1, 14));
 		montaTabuleiro.add(panelJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 650, 280, 80));
 
-		montaTabuleiro.add(nomeJogador_3, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 10, 80, 30));
+		montaTabuleiro.add(nomeJogador_2, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 10, 80, 30));
 		montaTabuleiro.add(nomeJogador_1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 100, 30));
 
 		/**
@@ -188,7 +188,7 @@ public class DominoServidor extends JFrame {
 		new Peca(6, 6, pecas);
 
 		panelJogador1.removeAll();
-		panelJogador3.removeAll();
+		panelJogador2.removeAll();
 
 		voltas = new java.util.Timer();
 
@@ -229,7 +229,7 @@ public class DominoServidor extends JFrame {
 			// if (!f.visible) f.vuelta();
 			if (f.horizontal)
 				f.gira();
-			panelJogador3.add(f);
+			panelJogador2.add(f);
 		}
 
 		Jpainel_1.setText("Esperando jogador...");
@@ -274,12 +274,12 @@ public class DominoServidor extends JFrame {
 			w2.writeObject(pecasDoJogador_3);
 			r2 = new ObjectInputStream(s2.getInputStream());
 
-			j3 = (Jogador) r2.readObject();
-			nomeJogador_3.setText(j3.nome);
+			j2 = (Jogador) r2.readObject();
+			nomeJogador_2.setText(j2.nome);
 
 
 			jogadores.add(j1);
-			jogadores.add(j3);
+			jogadores.add(j2);
 
 			w2.writeObject(jogadores);
 
@@ -337,12 +337,12 @@ public class DominoServidor extends JFrame {
 
 					}
 				}
-				else if (j.equals(j3)) {
+				else if (j.equals(j2)) {
 					Dados d = (Dados) r2.readObject();
 					f = d.f;
 					if (f != null) {
 						f.ponta = d.ponta;
-						j3.pecas.remove(f);
+						j2.pecas.remove(f);
 					}
 				}
 
@@ -380,12 +380,12 @@ public class DominoServidor extends JFrame {
 					}
 				}
 
-				else if (j.equals(j3)) {
+				else if (j.equals(j2)) {
 					Dados d = (Dados) r2.readObject();
 					f = d.f;
 					if (f != null) {
 						f.ponta = d.ponta;
-						j3.pecas.remove(f);
+						j2.pecas.remove(f);
 						
 						w2.writeObject(new Dados(f, f.ponta, jogadores));
 					}
@@ -693,16 +693,16 @@ public class DominoServidor extends JFrame {
 			for (int i = 0; i < jogadores.size(); i++) {
 				if (jogadores.get(i).equals(j1))
 					j1.pecas = ((Jogador) jogadores.get(i)).pecas;
-				if (jogadores.get(i).equals(j3))
-					j3.pecas = ((Jogador) jogadores.get(i)).pecas;
+				if (jogadores.get(i).equals(j2))
+					j2.pecas = ((Jogador) jogadores.get(i)).pecas;
 			}
 			panelJogador1.removeAll();
-			panelJogador3.removeAll();
+			panelJogador2.removeAll();
 
 			for (int i = 0; i < j1.pecas.size(); i++)
 				panelJogador1.add((Peca) j1.pecas.get(i));
-			for (int i = 0; i < j3.pecas.size(); i++)
-				panelJogador3.add((Peca) j3.pecas.get(i));
+			for (int i = 0; i < j2.pecas.size(); i++)
+				panelJogador2.add((Peca) j2.pecas.get(i));
 
 			for (int i = 0; i < j1.pecas.size(); i++) {
 				Peca f = (Peca) j1.pecas.get(i);
@@ -730,8 +730,8 @@ public class DominoServidor extends JFrame {
 				});
 			}
 
-			for (int i = 0; i < j3.pecas.size(); i++) {
-				Peca f = (Peca) j3.pecas.get(i);
+			for (int i = 0; i < j2.pecas.size(); i++) {
+				Peca f = (Peca) j2.pecas.get(i);
 				if (!f.horizontal) // TODO verificar a negação
 					f.gira();
 				if (f.visible)
@@ -743,10 +743,10 @@ public class DominoServidor extends JFrame {
 			montaTabuleiro.add(panelJogador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 650,
 					Peca.tamanho * j1.pecas.size(), Peca.tamanho * 2));
 
-			panelJogador3.repaint();
-			panelJogador3.setLayout(new java.awt.GridLayout(1, j3.pecas.size(), 0, 0));
-			montaTabuleiro.add(panelJogador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0,
-					Peca.tamanho * j3.pecas.size(), Peca.tamanho * 2));
+			panelJogador2.repaint();
+			panelJogador2.setLayout(new java.awt.GridLayout(1, j2.pecas.size(), 0, 0));
+			montaTabuleiro.add(panelJogador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0,
+					Peca.tamanho * j2.pecas.size(), Peca.tamanho * 2));
 
 			montaTabuleiro.validate();
 
@@ -792,8 +792,8 @@ public class DominoServidor extends JFrame {
 	private JLabel Jpainel_1;
 	private JPanel Jpainel_2;
 	private JLabel nomeJogador_1;
-	private JLabel nomeJogador_3;
+	private JLabel nomeJogador_2;
 	private JPanel panelJogador1;
-	private JPanel panelJogador3;
+	private JPanel panelJogador2;
 
 }

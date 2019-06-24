@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -13,6 +16,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,8 +56,9 @@ public class Domino extends JFrame {
 
 	/**
 	 * Instantiates a new domino.
+	 * @throws IOException 
 	 */
-	public Domino() {
+	public Domino() throws IOException {
 		
 		initComponents();
 
@@ -63,8 +69,9 @@ public class Domino extends JFrame {
 
 	/**
 	 * Inits the components.
+	 * @throws IOException 
 	 */
-	private void initComponents() {
+	private void initComponents() throws IOException {
 
 		montaTabuleiro = new JPanel();
 		panelJogador_1 = new JPanel();
@@ -76,6 +83,9 @@ public class Domino extends JFrame {
 		jButton1 = new JButton();
 		jLabel1 = new JLabel();
 
+		BufferedImage image = ImageIO.read(new File("C:/Users/acastroa/workspace-azul/SistemasDistribuidosDomino/src/fundo.jpg"));
+	    JLabel labelImagem = new JLabel(new ImageIcon(image));
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new java.awt.Dimension(1350, 800));
 		getContentPane().setLayout(new AbsoluteLayout());
@@ -84,10 +94,11 @@ public class Domino extends JFrame {
 		montaTabuleiro.setPreferredSize(new Dimension(1300, 800));
 		montaTabuleiro.setLayout(new AbsoluteLayout());
 		montaTabuleiro.setBorder(new LineBorder(new Color(0, 0, 0)));
-
+	    montaTabuleiro.add(labelImagem,new AbsoluteConstraints(0, 0, 1300, 800));
+	    
 		panelJogador_2.setPreferredSize(new Dimension(300, 80));
 		panelJogador_2.setLayout(new java.awt.GridLayout(1, 14));
-		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 0, 300, 80));
+		montaTabuleiro.add(panelJogador_2, new AbsoluteConstraints(350, 1, 300, 80));
 		panelJogador_2.getAccessibleContext().setAccessibleDescription("");
 
 		panelJogador_1.setPreferredSize(new Dimension(300, 80));
@@ -138,6 +149,7 @@ public class Domino extends JFrame {
 		j = null;
 		todas_pecas = new ArrayList<Object>();
 
+		
 		panelJogador_1 = new JPanel();
 		panelJogador_2 = new JPanel();
 		nomeJogador_1 = new JLabel();
@@ -643,7 +655,12 @@ public class Domino extends JFrame {
 		 */
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new Domino().setVisible(true);
+				try {
+					new Domino().setVisible(true);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 	}
